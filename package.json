@@ -2,7 +2,7 @@
   "name": "import-to-require",
   "main": "./lib/import-to-require",
   "version": "0.0.1",
-  "description": "changes `import` syntax to `require`",
+  "description": "Changes `import` syntax to `require`",
   "keywords": [],
   "activationCommands": {
     "atom-workspace": "import-to-require:toggle"
