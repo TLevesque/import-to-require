@@ -1,6 +1,6 @@
 'use babel';
 
-import ImportToRequireView from '../lib/import-to-require-view';
+import ImportToRequireView from '../lib/atom-import-to-require-view';
 
 describe('ImportToRequireView', () => {
   it('has one valid test', () => {

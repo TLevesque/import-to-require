@@ -1,6 +1,6 @@
 'use babel';
 
-import ImportToRequire from '../lib/import-to-require';
+import ImportToRequire from '../lib/atom-import-to-require';
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 //
@@ -12,32 +12,32 @@ describe('ImportToRequire', () => {
 
   beforeEach(() => {
     workspaceElement = atom.views.getView(atom.workspace);
-    activationPromise = atom.packages.activatePackage('import-to-require');
+    activationPromise = atom.packages.activatePackage('atom-import-to-require');
   });
 
-  describe('when the import-to-require:toggle event is triggered', () => {
+  describe('when the atom-import-to-require:toggle event is triggered', () => {
     it('hides and shows the modal panel', () => {
       // Before the activation event the view is not on the DOM, and no panel
       // has been created
-      expect(workspaceElement.querySelector('.import-to-require')).not.toExist();
+      expect(workspaceElement.querySelector('.atom-import-to-require')).not.toExist();
 
       // This is an activation event, triggering it will cause the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'import-to-require:toggle');
+      atom.commands.dispatch(workspaceElement, 'atom-import-to-require:toggle');
 
       waitsForPromise(() => {
         return activationPromise;
       });
 
       runs(() => {
-        expect(workspaceElement.querySelector('.import-to-require')).toExist();
+        expect(workspaceElement.querySelector('.atom-import-to-require')).toExist();
 
-        let importToRequireElement = workspaceElement.querySelector('.import-to-require');
+        let importToRequireElement = workspaceElement.querySelector('.atom-import-to-require');
         expect(importToRequireElement).toExist();
 
         let importToRequirePanel = atom.workspace.panelForItem(importToRequireElement);
         expect(importToRequirePanel.isVisible()).toBe(true);
-        atom.commands.dispatch(workspaceElement, 'import-to-require:toggle');
+        atom.commands.dispatch(workspaceElement, 'atom-import-to-require:toggle');
         expect(importToRequirePanel.isVisible()).toBe(false);
       });
     });
@@ -51,11 +51,11 @@ describe('ImportToRequire', () => {
       // workspaceElement to the DOM are generally slower than those off DOM.
       jasmine.attachToDOM(workspaceElement);
 
-      expect(workspaceElement.querySelector('.import-to-require')).not.toExist();
+      expect(workspaceElement.querySelector('.atom-import-to-require')).not.toExist();
 
       // This is an activation event, triggering it causes the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'import-to-require:toggle');
+      atom.commands.dispatch(workspaceElement, 'atom-import-to-require:toggle');
 
       waitsForPromise(() => {
         return activationPromise;
@@ -63,9 +63,9 @@ describe('ImportToRequire', () => {
 
       runs(() => {
         // Now we can test for view visibility
-        let importToRequireElement = workspaceElement.querySelector('.import-to-require');
+        let importToRequireElement = workspaceElement.querySelector('.atom-import-to-require');
         expect(importToRequireElement).toBeVisible();
-        atom.commands.dispatch(workspaceElement, 'import-to-require:toggle');
+        atom.commands.dispatch(workspaceElement, 'atom-import-to-require:toggle');
         expect(importToRequireElement).not.toBeVisible();
       });
     });

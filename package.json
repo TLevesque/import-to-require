@@ -1,5 +1,5 @@
 {
-  "name": "import-to-require",
+  "name": "atom-import-to-require",
   "main": "./lib/import-to-require",
   "version": "0.1.0",
   "description": "Changes `import` syntax to `require`",
@@ -7,7 +7,7 @@
   "activationCommands": {
     "atom-workspace": "import-to-require:toggle"
   },
-  "repository": "https://github.com/TLevesque/import-to-require",
+  "repository": "https://github.com/TLevesque/atom-import-to-require",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

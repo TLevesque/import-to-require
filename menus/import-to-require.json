@@ -2,7 +2,7 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Toggle import-to-require",
+        "label": "Import To Require",
         "command": "import-to-require:toggle"
       }
     ]
