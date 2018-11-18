@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle import-to-require",
+        "command": "import-to-require:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "import-to-require",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "import-to-require:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
