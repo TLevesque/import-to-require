@@ -7,7 +7,7 @@
   "activationCommands": {
     "atom-workspace": "import-to-require:toggle"
   },
-  "repository": "https://github.com/atom/import-to-require",
+  "repository": "https://github.com/TLevesque/import-to-require",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
