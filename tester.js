@@ -1,28 +1,28 @@
 // const string = `
-// import App2, { Container3, connext, coon as alias } from "next/app";
-// import { Container2 }, App1 from "next/app";
-// import { Container1 } from "next/app";
-// import moment from "moment";
-// import { IntlProvider, addLocaleData } from "react-intl";
 // import text from "../../helpers/text";
-// import { IntlProvider, addLocaleData } from "react-intl";
-// import { close as crossIcon } from "react-icons-kit/ionicons/close";
-// import { close as crossIcon, open as openIcon } from "react-icons-kit/ionicons/close";
-// import cleanFromNullValues from './cleanFromNullValues';
-// import '../../styles/index.scss';
+// import App2, { Container3, connext, coon as alias } from "next/app";
 // import React from "react";
-// import Icon from "react-icons-kit";
-// import PropTypes from "prop-types";
-// import MobileDetect from "mobile-detect";
-// import signS3 from "koa-s3-sign-upload";
-// import { injectIntl } from "react-intl";
-// import { graphqlKoa, graphiqlKoa } from "graphql-server-koa";
-// import Card from "../../library/cardstack/Card";
-// import Button from "../../elements/buttons/Button";
-// import BackButton from "../../elements/buttons/BackButton";
-// import { checkmark } from "../../elements/utils";
-// import { IntlProvider, addLocaleData } from "../../elements/helpers";
 // `;
+// // import { Container2 }, App1 from "next/app";
+// // import { Container1 } from "next/app";
+// // import moment from "moment";
+// // import { IntlProvider, addLocaleData } from "react-intl";
+// // import { IntlProvider, addLocaleData } from "react-intl";
+// // import { close as crossIcon } from "react-icons-kit/ionicons/close";
+// // import { close as crossIcon, open as openIcon } from "react-icons-kit/ionicons/close";
+// // import cleanFromNullValues from './cleanFromNullValues';
+// // import '../../styles/index.scss';
+// // import Icon from "react-icons-kit";
+// // import PropTypes from "prop-types";
+// // import MobileDetect from "mobile-detect";
+// // import signS3 from "koa-s3-sign-upload";
+// // import { injectIntl } from "react-intl";
+// // import { graphqlKoa, graphiqlKoa } from "graphql-server-koa";
+// // import Card from "../../library/cardstack/Card";
+// // import Button from "../../elements/buttons/Button";
+// // import BackButton from "../../elements/buttons/BackButton";
+// // import { checkmark } from "../../elements/utils";
+// // import { IntlProvider, addLocaleData } from "../../elements/helpers";
 //
 // const getAllIndexes = (arr, func) => {
 //   let indexes = [];
@@ -64,13 +64,13 @@
 // };
 //
 // const extractPath = string => {
-//   const matchedText = string.match(/(\"|').+?(\"|')/i);
-//   return matchedText && matchedText[0].trim();
+//   const matchedText = string.match(/(\"|\')(.+?)(\"|\')/i);
+//   return matchedText && matchedText[2].trim();
 // };
 //
 // const extractName = string => {
-//   const matchedText = string.match(/(?<=import).+?(?=from)/);
-//   return matchedText && matchedText[0].trim();
+//   const matchedText = string.match(/import(.*?)from/);
+//   return matchedText && matchedText[1].trim();
 // };
 //
 // const createRequireString = string => {
@@ -81,14 +81,14 @@
 //   if (!name && path) return `require(${path});`;
 //
 //   if (name.match(/\{/i) && name.match(/\}/i) && !path.match(/\.\//i)) {
-//     const nameSring = string.match(/(?<=({)).+?(?=(}))/i)[0].trim();
+//     const nameSring = string.match(/{(.+?)}/i)[1].trim();
 //     const extraName =
 //       string
-//         .match(/(?<=(import)).+?(?=({))/i)[0]
+//         .match(/import(.+?){/i)[1]
 //         .trim()
 //         .replace(",", "") ||
 //       string
-//         .match(/(?<=(})).+?(?=(from))/i)[0]
+//         .match(/}(.+?)from/i)[1]
 //         .trim()
 //         .replace(",", "") ||
 //       null;
@@ -99,7 +99,6 @@
 //         : "";
 //       names.forEach((name, i) => {
 //         if (name.includes("as")) {
-//           name;
 //           const [originalName, newName] = name
 //             .split(" as ")
 //             .map(name => name.trim());
@@ -134,7 +133,7 @@
 //   }
 //
 //   if (name.match(/\{/i) && name.match(/\}/i) && path.match(/\.\//i)) {
-//     const nameSring = string.match(/(?<=({)).+?(?=(}))/i)[0].trim();
+//     const nameSring = string.match(/{(.+?)}/i)[1].trim();
 //
 //     if (nameSring.includes(",")) {
 //       const names = nameSring.split(",").map(name => name.trim());
@@ -153,9 +152,7 @@
 //   }
 //
 //   if (!name.match(/\{/i) && !name.match(/\}/i) && path.match(/\.\//i)) {
-//     return `const ${name} = require(${quote}${
-//       path.match(/(?<=("|')).+?(?=("|'))/i)[0]
-//     }${quote});`;
+//     return `const ${name} = require(${quote}${path}${quote});`;
 //   }
 //
 //   return `const ${name} = require(${path});`;
@@ -181,4 +178,4 @@
 //   }
 // };
 //
-// // parseString(string); //?
+// parseString(string); //?
