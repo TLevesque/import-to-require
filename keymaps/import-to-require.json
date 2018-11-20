@@ -1,5 +1,5 @@
 {
   "atom-workspace": {
-    "ctrl-alt-m": "import-to-require:toggle"
+    "ctrl-alt-i": "import-to-require:toggle"
   }
 }
