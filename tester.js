@@ -1,52 +1,63 @@
 const string = `
-import moment from 'moment';
-import {
-  IntlProvider,
-  addLocaleData
-} from "react-intl";
+import App2, { Container3, connext, coon as alias } from "next/app";
+import { Container2 }, App1 from "next/app";
+import { Container1 } from "next/app";
+import moment from "moment";
+import { IntlProvider, addLocaleData } from "react-intl";
 import text from "../../helpers/text";
-import {
-  IntlProvider,
-  addLocaleData
-} from "react-intl";
+import { IntlProvider, addLocaleData } from "react-intl";
+import { close as crossIcon } from "react-icons-kit/ionicons/close";
+import { close as crossIcon, open as openIcon } from "react-icons-kit/ionicons/close";
+import cleanFromNullValues from './cleanFromNullValues';
+import '../../styles/index.scss';
+import React from "react";
+import Icon from "react-icons-kit";
+import PropTypes from "prop-types";
+import MobileDetect from "mobile-detect";
+import signS3 from "koa-s3-sign-upload";
+import { injectIntl } from "react-intl";
+import { graphqlKoa, graphiqlKoa } from "graphql-server-koa";
+import Card from "../../library/cardstack/Card";
+import Button from "../../elements/buttons/Button";
+import BackButton from "../../elements/buttons/BackButton";
+import { checkmark } from "../../elements/utils";
+import { IntlProvider, addLocaleData } from "../../elements/helpers";
 `;
-// import { close as crossIcon } from "react-icons-kit/ionicons/close";
-// import { close as crossIcon, open as openIcon } from "react-icons-kit/ionicons/close";
-// import cleanFromNullValues from './cleanFromNullValues';
-// import '../../styles/index.scss';
-// import React from "react";
-// import Icon from "react-icons-kit";
-// import PropTypes from "prop-types";
-// import MobileDetect from "mobile-detect";
-// import signS3 from "koa-s3-sign-upload";
-// import { injectIntl } from "react-intl";
-// import { graphqlKoa, graphiqlKoa } from "graphql-server-koa";
-// import Card from "../../library/cardstack/Card";
-// import Button from "../../elements/buttons/Button";
-// import BackButton from "../../elements/buttons/BackButton";
-// import { checkmark } from "../../elements/utils";
-// import { IntlProvider, addLocaleData } from "../../elements/helpers";
-// import App, { Container } from "next/app";
 
 const getAllIndexes = (arr, func) => {
   let indexes = [];
   arr.forEach((line, i) => {
     if (func(line)) indexes.push(i);
   });
-  // let i = -1;
-  // while ((i = arr.findIndex(func)) !== -1) {
-  //   indexes.push(i);
-  // }
   return indexes;
 };
 
 const splitString = string => {
   const trimString = string.trim();
-  const lineArr = trimString.split("\n").map(line => line.trim()); //?
-  const importIndex = getAllIndexes(lineArr, line => line === "import {"); //?
-  const fromIndex = getAllIndexes(lineArr, line => line.match(/} from/)); //?
-  if (importIndex !== -1 && fromIndex !== -1) {
-    console.log("toto");
+  const lineArr = trimString.split("\n").map(line => line.trim());
+  const importIndex = getAllIndexes(lineArr, line => line === "import {");
+  const fromIndex = getAllIndexes(lineArr, line => line.match(/} from/));
+  if (importIndex.length > 0 && fromIndex.length > 0) {
+    const indexList = importIndex
+      .map((importInd, i) => [importInd, fromIndex[i]])
+      .map(arr => {
+        const arrLength = +arr[1] - +arr[0] + 1;
+        const indexes = [];
+        let i = +arr[0];
+        while (i <= +arr[1]) {
+          indexes.push(i);
+          i++;
+        }
+        return indexes;
+      })
+      .reduce((prev, curr) => prev.concat(curr));
+    const arrays = importIndex
+      .map((index, i) => lineArr.slice(index, fromIndex[i] + 1))
+      .map(arr => arr.join(""));
+    lineArr.forEach((line, i, arr) => {
+      if (!indexList.includes(i)) arrays.push(line);
+    });
+    return arrays;
   } else {
     return lineArr.filter(line => line.length !== 0);
   }
@@ -63,28 +74,39 @@ const extractName = string => {
 };
 
 const createRequireString = string => {
-  const path = extractPath(string); //?
-  const name = extractName(string); //?
+  const path = extractPath(string);
+  const name = extractName(string);
   const quote = string.includes('"') ? '"' : "'";
 
   if (!name && path) return `require(${path});`;
-  if (!name && !path) return `kjdk`;
 
   if (name.match(/\{/i) && name.match(/\}/i) && !path.match(/\.\//i)) {
     const nameSring = string.match(/(?<=({)).+?(?=(}))/i)[0].trim();
-
+    const extraName =
+      string
+        .match(/(?<=(import)).+?(?=({))/i)[0]
+        .trim()
+        .replace(",", "") ||
+      string
+        .match(/(?<=(})).+?(?=(from))/i)[0]
+        .trim()
+        .replace(",", "") ||
+      null;
     if (nameSring.includes(",")) {
       const names = nameSring.split(",").map(name => name.trim());
-      let returnedString = "";
+      let returnedString = extraName
+        ? `const ${extraName} = require(${path});\n`
+        : "";
       names.forEach((name, i) => {
         if (name.includes("as")) {
+          name;
           const [originalName, newName] = name
-            .split("as")
+            .split(" as ")
             .map(name => name.trim());
           if (i === names.length - 1) {
-            returnedString = `${returnedString}const ${newName} = require(${path});`;
+            returnedString = `${returnedString}const ${newName} = require(${path}).${originalName};`;
           } else {
-            returnedString = `${returnedString}const ${newName} = require(${path});\n`;
+            returnedString = `${returnedString}const ${newName} = require(${path}).${originalName};\n`;
           }
         } else {
           if (i === names.length - 1) {
@@ -100,9 +122,13 @@ const createRequireString = string => {
         const [originalName, newName] = nameSring
           .split("as")
           .map(name => name.trim());
-        return `const ${newName} = require(${path});`;
+        return extraName
+          ? `const ${extraName} = require(${path});\nconst ${newName} = require(${path});`
+          : `const ${newName} = require(${path});`;
       } else {
-        return `const ${nameSring} = require(${path}).${nameSring};`;
+        return extraName
+          ? `const ${extraName} = require(${path});\nconst ${nameSring} = require(${path}).${nameSring};`
+          : `const ${nameSring} = require(${path}).${nameSring};`;
       }
     }
   }
@@ -155,4 +181,4 @@ const parseString = string => {
   }
 };
 
-parseString(string); //?
+// parseString(string); //?
