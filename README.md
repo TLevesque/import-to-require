@@ -1,42 +1,43 @@
 # import-to-require package
 
-Select the 'import' ES6 syntax line and press ctrl+alt+m to turn it into 'require' ES5 syntax.
+Select the line wiht the 'import' ES6 syntax and press ctrl+alt+m to turn it into a line with 'require' ES5 syntax.
 
-You can select multiple lines to modify several import lines at a time. But doesn't support multi-cursors.
+You can select multiple lines to modify several import lines at a time.<br />
+But doesn't support multi-cursors.
 
 ### Support those kinds of imports:
 
-import moment from "moment";**
-=> const moment = require(moment);**
+import moment from "moment";<br />
+=> const moment = require(moment);<br />
 
-import React from "react";**
-=> const React = require(react);**
+import React from "react";<br />
+=> const React = require(react);<br />
 
-import text from "../../helpers/text";**
-=> const text = require("../../helpers/text");**
+import text from "../../helpers/text";<br />
+=> const text = require("../../helpers/text");<br />
 
-import Button from "../../elements/buttons/Button";**
-=> const Button = require("../../elements/buttons/Button");**
+import Button from "../../elements/buttons/Button";<br />
+=> const Button = require("../../elements/buttons/Button");<br />
 
-import { Container1 } from "next/app";**
-=> const Container1 = require(next/app).Container1;**
+import { Container1 } from "next/app";<br />
+=> const Container1 = require(next/app).Container1;<br />
 
-import { checkmark } from "../../elements/utils";**
-=> const checkmark = require(../../elements/utils).checkmark;;**
+import { checkmark } from "../../elements/utils";<br />
+=> const checkmark = require(../../elements/utils).checkmark;<br />
 
-import { IntlProvider, addLocaleData } from "react-intl";**
-=> const IntlProvider = require(react-intl).IntlProvider;**
-=> const addLocaleData = require(react-intl).addLocaleData;\_\_
+import { IntlProvider, addLocaleData } from "react-intl";<br />
+=> const IntlProvider = require(react-intl).IntlProvider;<br />
+=> const addLocaleData = require(react-intl).addLocaleData;<br />
 
-import { close as crossIcon } from "react-icons-kit/ionicons/close";**
-=> const crossIcon = require(react-icons-kit/ionicons/close);**
+import { close as crossIcon } from "react-icons-kit/ionicons/close";<br />
+=> const crossIcon = require(react-icons-kit/ionicons/close);<br />
 
-import { close as crossIcon, open as openIcon } from "react-icons-kit/ionicons/close"**
-=> const crossIcon = require(react-icons-kit/ionicons/close).close;**
-=> const openIcon = require(react-icons-kit/ionicons/close).open;\_\_
+import { close as crossIcon, open as openIcon } from "react-icons-kit/ionicons/close";<br />
+=> const crossIcon = require(react-icons-kit/ionicons/close).close;<br />
+=> const openIcon = require(react-icons-kit/ionicons/close).open;<br />
 
-import App, { Container, connect, coon as alias } from "next/app"**
-=> const App = require(next/app);**
-=> const Container = require(next/app).Container;**
-=> const connect = require(next/app).connect;**
-=> const alias = require(next/app).coon;\_\_
+import App, { Container, connect, coon as alias } from "next/app";<br />
+=> const App = require(next/app);<br />
+=> const Container = require(next/app).Container;<br />
+=> const connect = require(next/app).connect;<br />
+=> const alias = require(next/app).coon;<br />
