@@ -2,8 +2,8 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Import To Require",
-        "command": "import-to-require:toggle"
+        "label": "Toggle tester",
+        "command": "tester:toggle"
       }
     ]
   },
@@ -12,11 +12,11 @@
       "label": "Packages",
       "submenu": [
         {
-          "label": "import-to-require",
+          "label": "tester",
           "submenu": [
             {
               "label": "Toggle",
-              "command": "import-to-require:toggle"
+              "command": "tester:toggle"
             }
           ]
         }
