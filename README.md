@@ -33,7 +33,7 @@ import { IntlProvider, addLocaleData } from "react-intl";<br />
 => const addLocaleData = require("react-intl").addLocaleData;<br />
 
 import { close as crossIcon } from "react-icons-kit/ionicons/close";<br />
-=> const crossIcon = require("react-icons-kit/ionicons/close");<br />
+=> const crossIcon = require("react-icons-kit/ionicons/close").close;<br />
 
 import { close as crossIcon, open as openIcon } from "react-icons-kit/ionicons/close";<br />
 => const crossIcon = require("react-icons-kit/ionicons/close").close;<br />
