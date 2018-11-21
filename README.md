@@ -1,6 +1,8 @@
 # import-to-require package
 
-Select the line wiht the 'import' ES6 syntax and press ctrl+alt+m to turn it into a line with 'require' ES5 syntax.
+!! Under development / Not fully functional yet !!
+
+Select the line (or lines) with the 'import' ES6 syntax and press ctrl+alt+m to turn it into a line with 'require' ES5 syntax.
 
 You can select multiple lines to modify several import lines at a time.<br />
 But doesn't support multi-cursors.
