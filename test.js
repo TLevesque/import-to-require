@@ -54,7 +54,7 @@ const extractName = string => {
 const createRequireString = string => {
   const path = extractPath(string);
   const name = extractName(string);
-  const quote = string.includes('"') ? '"' : "'";
+  const quote = string.match(/"/) ? '"' : "'";
 
   if (!name && path) return `require(${quote}${path}${quote});`;
 
@@ -155,22 +155,22 @@ const parseString = string => {
     return returnedString;
   }
 };
-// import React from "react";
-// import text from "../../helpers/text";
-// import Button from "../../elements/buttons/Button";
-// import { Container1 } from "next/app";
-// import { checkmark } from "../../elements/utils";
-// import { IntlProvider, addLocaleData } from "react-intl";
+// import text from '../../helpers/text';
+// import Button from '../../elements/buttons/Button';
+// import { Container1 } from 'next/app';
+// import { checkmark } from '../../elements/utils';
+// import { IntlProvider, addLocaleData } from 'react-intl';
 // import {
 //   compose,
 //   withApollo,
 //   gql
 // } from 'react-apollo';
-// import App, { Container, connect, coon as alias } from "next/app";
-// import { close as crossIcon } from "react-icons-kit/ionicons/close";
-// import { close as crossIcon, open as openIcon } from "react-icons-kit/ionicons/close";
 const string = `
-import moment from "moment";
+// import { close as crossIcon, open as openIcon } from 'react-icons-kit/ionicons/close';
+// import App, { Container, connect, coon as alias } from 'next/app';
+// import { close as crossIcon } from 'react-icons-kit/ionicons/close';
+import React from 'react';
+import moment from 'moment';
 `;
 
-// parseString(string);
+parseString(string); //?
