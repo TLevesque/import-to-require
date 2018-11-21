@@ -45,10 +45,10 @@ import App, { Container, connect, coon as alias } from "next/app";<br />
 => const connect = require("next/app").connect;<br />
 => const alias = require("next/app").coon;<br />
 
-import {
-compose,
-withApollo,
-gql
+import {<br />
+compose,<br />
+withApollo,<br />
+gql<br />
 } from 'react-apollo';<br />
 => const compose = require('react-apollo').compose;<br />
 => const withApollo = require('react-apollo').withApollo;<br />
